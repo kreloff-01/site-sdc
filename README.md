@@ -1,14 +1,14 @@
-# Our Website
+# Our Website (Angular 2 Branch)
 
-Members: Ellery Kreloff, Vaughn Kottler, Jonathan Erbe
+Contributors: Vaughn Kottler
 
 ## Technologies
 
-1. **Angular JS 1.5.x**
+1. **Angular JS 2**
 
    Eventually we will discuss the way we use Angular here.
 
-2. **Node.js 4.2.6**
+2. **Node.js 6.2.2**
   * Express, body-parser
 
    If Node is not already running the frontend won't be able to render anything.  
@@ -20,7 +20,7 @@ Members: Ellery Kreloff, Vaughn Kottler, Jonathan Erbe
 
    Currently we have nothing in production.
 
-4. **PostgreSQL**
+4. **PostgreSQL or Firebase**
 
    Future scope.
 
@@ -30,7 +30,7 @@ Members: Ellery Kreloff, Vaughn Kottler, Jonathan Erbe
 
 ## Development
 
-###**Install Node.js (4.4.6 LTS):** https://nodejs.org/en/
+###**Install Node.js (6.2.2):** https://nodejs.org/en/
 
 ###**Pull the repository:**
 
