@@ -17,10 +17,32 @@ div.margin{
 .nav-button:not([disabled]) {
     color : white;
     background-color: black;
-    border-radius: 10px 0 0 10px;
+    border-radius: 5px 5px 5px 5px;
     font-size: 16px;
 }
 .nav-button:not([disabled]):hover {
     background-color: #004d00;
     color: white;
+}
+
+/* Schedule css */
+
+.tabsStaticTabs md-tab-content {
+    padding: 25px;
+    background-color:#d9d9d9;
+}
+
+.tabsStaticTabs .after-tabs-area > span {
+    margin-top: 25px;
+    padding-right: 15px;
+    vertical-align: middle;
+    line-height: 30px;
+    height: 35px; }
+
+.tabsStaticTabs .after-tabs-area > md-checkbox {
+    margin-top: 26px;
+    margin-left: 0; }
+
+.md-tabs.md-accent.ng-isolate-scope {
+/* perhaps for later */
 }
