@@ -29,12 +29,27 @@
   <div ng-controller="ScheduleCtrl" ng-cloak="" class="tabsStaticTabs scheduleContainer" ng-app="MyApp">
     <md-content class="md-padding">
       <!-- height section below -->
-      <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}">
-        <md-tab id="tab1">
+      <md-tabs id="schedule" class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}">
+        <md-tab id="sept">
           <md-tab-label>September</md-tab-label>
           <md-tab-body>
-            View for Item #1 <br>
-            data.selectedIndex = 0;
+            <div ng-controller="gridListDemoCtrl as vm" flex ng-cloak>
+              <md-grid-list
+                      md-cols="7"
+                      md-row-height-gt-md="1:1" md-row-height="4:3"
+                      md-gutter="20px" md-gutter-gt-sm="8px" >
+                <md-grid-tile ng-repeat="tile in vm.tiles"
+                              md-rowspan="{{tile.span.row}}"
+                              md-colspan="{{tile.span.col}}"
+                              md-colspan-sm="1"
+                              md-colspan-xs="1"
+                              ng-class="tile.background" >
+                    <h3>{{vm.info.content}}</h3>
+                  <md-grid-tile-footer><h3>{{tile.title}}</h3></md-grid-tile-footer>
+                </md-grid-tile>
+              </md-grid-list>
+            </div>
+
           </md-tab-body>
         </md-tab>
         <md-tab id="tab2">
