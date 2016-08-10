@@ -25,12 +25,7 @@ div.margin{
     color: white;
 }
 
-/* Schedule css */
-
-.tabsStaticTabs md-tab-content {
-    padding: 25px;
-    background-color:#d9d9d9;
-}
+/* Schedule css below */
 
 .tabsStaticTabs .after-tabs-area > span {
     margin-top: 25px;
@@ -47,18 +42,21 @@ div.margin{
 /* perhaps for later */
 }
 
-#schedule{
-    min-height:700px;
+/* */
+div.ng-scope.ng-isolate-scope{
+    margin-left: .12%;
 }
 
 /* for inner calendar */
-.gridListdemoDynamicTiles md-icon {
-    width: 50%;
-    height: 30%; }
-.gridListdemoDynamicTiles md-icon svg {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%; }
+#schedule{
+    min-height:930px;
+    width:85%;
+    margin:auto;
+}
+
+.tileBackground{
+    background-color: #e6e6e6;
+}
 .gridListdemoDynamicTiles .s64 {
     font-size: 64px; }
 .gridListdemoDynamicTiles .s32 {
@@ -86,3 +84,15 @@ div.margin{
     font-weight: 700;
     width: 100%;
     text-align: center; }
+
+/* for days of the week */
+.dayofweek{
+    background-color: #e6e6e6;
+    padding: .4%;
+    text-align:center;
+    font-size:12px;
+    line-height: 24px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: .5%;
+}
