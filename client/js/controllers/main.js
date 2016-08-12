@@ -42,11 +42,29 @@ site.directive("testDir", function () {
 /* dynamic tile generation for calendar days -- WIP */
 site.controller('gridListCtrl', function($scope) {
       this.tiles = buildGridModel({
-        background: ""
+        background: "",
+        footer: ""
       });
-        function buildGridModel(tileTmpl){
+        var month = '';
+        function buildGridModel(tileTmpl, month){
             var it, results = [ ];
-            for (var j=0; j<30; j++) {
+            var days = 0;
+            var month = "Sept";
+            switch(month){
+                case "Sept":{
+                    days = 30;
+                    for (var j=0; j<4; j++) {
+                        it = angular.extend({},tileTmpl);
+                        it.title = "";
+                        it.span  = { row : 1, col : 1 };
+                        it.background = "blankClass";
+                        it.footer = "blankClass";
+                        results.push(it);
+                    }
+                }
+            }
+
+            for (var j=0; j<days; j++) {
                 it = angular.extend({},tileTmpl);
                 it.title = (j+1);
                 it.span  = { row : 1, col : 1 };
