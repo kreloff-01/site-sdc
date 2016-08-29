@@ -29,16 +29,17 @@
   <div ng-controller="ScheduleCtrl" ng-cloak="" class="tabsStaticTabs scheduleContainer" ng-app="MyApp">
     <md-content class="md-padding">
       <!-- height section below -->
-      <md-tabs id="schedule" class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}">
-        <md-tab id="sept">
-          <md-tab-label>September</md-tab-label>
+      <div ng-controller="tabGen as tab">
+      <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}">
+        <md-tab ng-repeat ="month in tab.tabs">
+          <md-tab-label>{{month.month}}</md-tab-label>
           <md-tab-body>
             <!-- days of the week start -->
             <div layout="row" ng-controller="daysOfWeek as dow">
               <div ng-repeat="days in dow.getDays" flex class="dayofweek">{{days.day}}</div>
             </div>
-            <!-- day of week end -->
-            <div ng-controller="gridListCtrl as vm" flex ng-cloak>
+            <!-- day of week end  -->
+            <div ng-init="init(month.blankDays, month.days)" ng-controller="gridListCtrl as vm" flex ng-cloak>
               <md-grid-list
                       md-cols="7"
                       md-row-height-gt-md="1:1" md-row-height="4:3"
@@ -54,31 +55,10 @@
                 </md-grid-tile>
               </md-grid-list>
             </div>
-
-          </md-tab-body>
-        </md-tab>
-        <md-tab id="tab2">
-          <md-tab-label>October</md-tab-label>
-          <md-tab-body>
-            View for Item #2 <br>
-            data.selectedIndex = 1;
-          </md-tab-body>
-        </md-tab>
-        <md-tab id="tab3">
-          <md-tab-label>November</md-tab-label>
-          <md-tab-body>
-            View for Item #3 <br>
-            data.selectedIndex = 2;
-          </md-tab-body>
-        </md-tab>
-        <md-tab id="tab4">
-          <md-tab-label>December</md-tab-label>
-          <md-tab-body>
-            View for Item #4 <br>
-            data.selectedIndex = 3;
           </md-tab-body>
         </md-tab>
       </md-tabs>
+      </div>
     </md-content>
   </div>
 
