@@ -39,48 +39,63 @@ site.directive("testDir", function () {
     };
 }) */
 
-site.controller('tabGen', function($scope){
-    var filledDays, blankDay;
+/* keeps count of ng-repeat iteration*/
+site.value('monthIteration', 0);
+
+site.factory('dataInit', ['monthIteration', function dataInit(monthIteration){
+    var data = [];
+    console.log("factory access");
+    data.push({month: "September", days: 30, blankDays: 4});
+    data.push({month: "October", days: 31, blankDays: 6});
+    data.push({month: "November", days: 30, blankDays: 2});
+    data.push({month: "December", days: 31, blankDays: 4});
+
+    data.getMonth = function(currMonth){
+        return data[currMonth].month;
+    }
+
+    data.getDays = function(currMonth){
+        return data[currMonth].days;
+    }
+
+    data.getblankDays = function(currMonth){
+        return data[currMonth].blankDays;
+    }
+    return data;
+}]);
+
+site.controller('tabGen', function($scope, dataInit, monthIteration){
     this.tabs = getTabsToGenerate({
-        days:"",
-        blankDays:"",
         month:""
     });
     function getTabsToGenerate(tabs) {
-        var it, result = [], data = [];
-        data.push({month: "September", days: 30, blankDays: 4});
-        data.push({month: "October", days: 31, blankDays: 6});
-        data.push({month: "November", days: 30, blankDays: 2});
-        data.push({month: "December", days: 31, blankDays: 4});
+        var it, result = [];
         for (var i = 0; i < 4; i++) {
             it = angular.extend({}, tabs);
-            it.days = data[i].days;
-            it.month = data[i].month;
-            it.blankDays = data[i].blankDays;
+            month = dataInit.getMonth(monthIteration);
+            it.month = month;
             result.push(it);
+            monthIteration++;
         }
+
         return result;
     }
 });
 
 /* dynamic tile generation for calendar days -- WIP */
 site.controller('gridListCtrl', function($scope) {
-    $scope.init = function(days, blankDays){
-        $scope.normalDays = days;
-        $scope.emptyDays = blankDays;
-        console.log($scope.normalDays + " normal days init");
-        console.log($scope.blankDays + " blank days init");
-    };
-
+    console.log("grid list controller access");
+    //this.days = dataInit.getDays(monthIteration);
+   // this.blankDays = dataInit.getblankDays(monthIteration);
     this.tiles = buildGridModel({
         background: "",
         footer: ""
     });
     function buildGridModel(tileTmpl){
         var it,results = [ ];
-        console.log($scope.normalDays + " normal days func");
-        console.log($scope.blankDays + " blank days func");
-        for (var j=0; j<$scope.emptyDays; j++) {
+        //console.log(this.days + " normal days func");
+       // console.log(this.blankDays + " blank days func");
+        for (var j=0; j<this.days; j++) {
             it = angular.extend({},tileTmpl);
             it.title = "";
             it.span  = { row : 1, col : 1 };
@@ -89,7 +104,7 @@ site.controller('gridListCtrl', function($scope) {
             results.push(it);
         }
 
-        for (var j=0; j<$scope.normalDays; j++) {
+        for (var j=0; j<this.blankDays; j++) {
             it = angular.extend({},tileTmpl);
             it.title = (j+1);
             it.span  = { row : 1, col : 1 };
@@ -98,7 +113,7 @@ site.controller('gridListCtrl', function($scope) {
         }
         return results;
     }
-    });
+});
 
 /* days of the week -- works */
 site.controller('daysOfWeek', function($scope){

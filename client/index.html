@@ -39,7 +39,7 @@
               <div ng-repeat="days in dow.getDays" flex class="dayofweek">{{days.day}}</div>
             </div>
             <!-- day of week end  -->
-            <div ng-init="init(month.blankDays, month.days)" ng-controller="gridListCtrl as vm" flex ng-cloak>
+            <div ng-controller="gridListCtrl as vm" flex ng-cloak>
               <md-grid-list
                       md-cols="7"
                       md-row-height-gt-md="1:1" md-row-height="4:3"
