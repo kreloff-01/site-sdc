@@ -43,8 +43,8 @@ site.directive("testDir", function () {
 site.value('monthIteration', 0);
 
 site.factory('dataInit', ['monthIteration', function dataInit(monthIteration){
+    var counter = 0;
     var data = [];
-    console.log("factory access");
     data.push({month: "September", days: 30, blankDays: 4});
     data.push({month: "October", days: 31, blankDays: 6});
     data.push({month: "November", days: 30, blankDays: 2});
@@ -61,10 +61,24 @@ site.factory('dataInit', ['monthIteration', function dataInit(monthIteration){
     data.getblankDays = function(currMonth){
         return data[currMonth].blankDays;
     }
+
+    data.getCounter = function(){
+        return counter;
+    }
+
+    data.updateCounter = function(){
+        counter++;
+    }
+
+    data.resetCounter = function(){
+        counter = 0;
+    }
+
     return data;
 }]);
 
 site.controller('tabGen', function($scope, dataInit, monthIteration){
+    console.log("tabGen access");
     this.tabs = getTabsToGenerate({
         month:""
     });
@@ -83,19 +97,18 @@ site.controller('tabGen', function($scope, dataInit, monthIteration){
 });
 
 /* dynamic tile generation for calendar days -- WIP */
-site.controller('gridListCtrl', function($scope) {
+site.controller('gridListCtrl', function($rootScope, dataInit) {
     console.log("grid list controller access");
-    //this.days = dataInit.getDays(monthIteration);
-   // this.blankDays = dataInit.getblankDays(monthIteration);
+    var days = dataInit.getDays(dataInit.getCounter());
+    var blankDays = dataInit.getblankDays(dataInit.getCounter());
+    console.log(dataInit.getCounter() + " current month iteration");
     this.tiles = buildGridModel({
         background: "",
         footer: ""
     });
     function buildGridModel(tileTmpl){
         var it,results = [ ];
-        //console.log(this.days + " normal days func");
-       // console.log(this.blankDays + " blank days func");
-        for (var j=0; j<this.days; j++) {
+        for (var j=0; j<blankDays; j++) {
             it = angular.extend({},tileTmpl);
             it.title = "";
             it.span  = { row : 1, col : 1 };
@@ -104,13 +117,14 @@ site.controller('gridListCtrl', function($scope) {
             results.push(it);
         }
 
-        for (var j=0; j<this.blankDays; j++) {
+        for (var j=0; j<days; j++) {
             it = angular.extend({},tileTmpl);
             it.title = (j+1);
             it.span  = { row : 1, col : 1 };
             it.background = "tileBackground";
             results.push(it);
         }
+        dataInit.updateCounter();
         return results;
     }
 });
