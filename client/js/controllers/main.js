@@ -22,24 +22,33 @@ var site = angular.module('sdc')
   }
 })();
 
-/* current element WIP
+/* individual calendar day items */
+site.factory('calendarItems', function calendarItems(){
+    var data = [];
 
-site.directive("testDir", function () {
-    function link(scope, element) {
-    }
-    return {
-        restrict: "AE",
-        link: link,
-        controller:function($scope,$element){
-            $scope.name2 = 'this is second name';
-            var barGridSection = $element.find('#barGridSection'); //helps to find the child element.
-            console.log("does this work?");
+
+    data.push({month: "September", 6: "classes begin", 14: "student org fair", 15: "student org fair",
+    17:"kickoff meeting CS2112 @ 6pm", 24: "club meeting CS2112 @ 6pm"});
+    data.push({month: "October", 1: "meeting ft. Capital One", 8: "club meeting \n CS2112 @ 6pm",
+    15: "club meeting\n CS2112 @ 6pm ", 22:"club meeting \n CS2112 @ 6pm", 29: "club meeting \n CS2112 @ TBA"});
+    data.push({month: "November", 5: "club meeting\n CS2112 @ 6pm ", 12: "club meeting\n CS2112 @ 6pm ",
+    19: "club meeting\n CS2112 @ 6pm ", 26: "no meeting - Thanksgiving"});
+    data.push({month: "December", 3: "club meeting\n CS2112 @ 6pm", 10: "final club meeting :(\n CS2112 @ 6pm",
+    });
+
+    data.getInfo = function(month, day){
+        if(data[month].hasOwnProperty(day.toString()) == false){
+            return "";
         }
+        else return data[month][day];
+    }
+    return data;
+});
 
-    };
-}) */
 
-/* keeps count of ng-repeat iteration*/
+
+
+/* keeps count of ng-repeat iteration and handles data retrival*/
 site.factory('dataInit', function dataInit(){
     var counter = 0;
     var data = [];
@@ -94,12 +103,14 @@ site.controller('tabGen', function($scope, dataInit){
 });
 
 /* dynamic tile generation for calendar days -- WIP */
-site.controller('gridListCtrl', function($scope, dataInit) {
+site.controller('gridListCtrl', function($scope, dataInit, calendarItems) {
     var days = dataInit.getDays(dataInit.getCounter());
     var blankDays = dataInit.getblankDays(dataInit.getCounter());
+    var month = dataInit.getCounter();
     this.tiles = buildGridModel({
         background: "",
-        footer: ""
+        footer: "",
+        info: ""
     });
     function buildGridModel(tileTmpl){
         var it,results = [ ];
@@ -117,6 +128,7 @@ site.controller('gridListCtrl', function($scope, dataInit) {
             it.title = (j+1);
             it.span  = { row : 1, col : 1 };
             it.background = "tileBackground";
+            it.info = calendarItems.getInfo(month, j+1);
             results.push(it);
         }
         dataInit.updateCounter();

@@ -14,6 +14,12 @@ div.margin{
     margin:auto;
 }
 
+md-tabs:not(.md-no-tab-content):not(.md-dynamic-height){
+    min-height: 900px;
+    width: 85%;
+    margin:auto;
+}
+
 .nav-button:not([disabled]) {
     color : white;
     background-color: black;
@@ -62,6 +68,20 @@ div.ng-scope.ng-isolate-scope{
     background-color: #fafafa;
 }
 
+md-grid-list md-grid-tile md-grid-tile-footer{
+    height: 25%;
+}
+
+.infoText{
+    font-size: .9em;
+    -webkit-margin-before: auto;
+    -webkit-margin-after: auto;
+    -webkit-margin-start: auto;
+    -webkit-margin-end: auto;
+    font-weight: normal;
+     text-transform: capitalize;
+}
+
 /* for days of the week */
 .dayofweek{
     background-color: #e6e6e6;
@@ -73,3 +93,4 @@ div.ng-scope.ng-isolate-scope{
     font-weight: 500;
     margin-bottom: .5%;
 }
+
